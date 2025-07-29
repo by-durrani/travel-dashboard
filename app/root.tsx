@@ -6,9 +6,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { registerLicense } from "@syncfusion/ej2-base";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+
+registerLicense(import.meta.env.VITE_SYNCFUSION_LICENCE_KEY);
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
