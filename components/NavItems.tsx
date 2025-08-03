@@ -1,9 +1,13 @@
 import { cn } from "lib/utils";
-import React from "react";
+import React, { type FC } from "react";
 import { Link, NavLink } from "react-router";
 import { sidebarItems } from "~/constants";
 
-const NavItems = () => {
+type NavItemsProps = {
+  handleClick?: () => void;
+};
+
+const NavItems: FC<NavItemsProps> = ({ handleClick }) => {
   const user = {
     name: "Durrani",
     email: "durraniarts@gmail.com",
@@ -29,6 +33,7 @@ const NavItems = () => {
                   className={cn("group nav-item", {
                     "bg-primary-100 !text-white": isActive,
                   })}
+                  onClick={handleClick}
                 >
                   <img
                     src={icon}

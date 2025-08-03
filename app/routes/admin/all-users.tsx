@@ -1,7 +1,13 @@
+import Header from "components/Header";
 import React from "react";
 
 const AllUsers = () => {
-  return <div>AllUsers</div>;
+  return (
+    <main className="dashboard wrapper">
+      <Header title={"Trips Page"} description="Check out our current users" />
+      All Users Page Contents
+    </main>
+  );
 };
 
 export default AllUsers;
