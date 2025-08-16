@@ -1,6 +1,7 @@
 import { cn } from "lib/utils";
 import React, { type FC } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLoaderData, useNavigate } from "react-router";
+import { logoutUser } from "~/appwrite/auth";
 import { sidebarItems } from "~/constants";
 
 type NavItemsProps = {
@@ -8,11 +9,15 @@ type NavItemsProps = {
 };
 
 const NavItems: FC<NavItemsProps> = ({ handleClick }) => {
-  const user = {
-    name: "Durrani",
-    email: "durraniarts@gmail.com",
-    imageUrl: "https://avatars.githubusercontent.com/u/100535468?v=4",
+  const user = useLoaderData(); // fetches from the nearest or parent exported data from clientLoader function (React Router) basically just parent not in the children pages
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logoutUser();
+    navigate("/sign-in");
   };
+
   return (
     <section className="nav-items">
       <Link to={"/"} className="link-logo">
@@ -53,15 +58,13 @@ const NavItems: FC<NavItemsProps> = ({ handleClick }) => {
           <img
             src={user.imageUrl || "/assets/images/david.webp"}
             alt={user.name}
+            referrerPolicy="no-referrer"
           />
           <article>
             <h2>{user.name}</h2>
             <p>{user.email}</p>
           </article>
-          <button
-            className="cursor-pointer "
-            onClick={() => console.log("Logout")}
-          >
+          <button className="cursor-pointer " onClick={handleLogout}>
             <img
               src="/assets/icons/logout.svg"
               alt="logout"
