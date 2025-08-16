@@ -2,13 +2,22 @@ import Header from "components/Header";
 import StatsCard from "components/StatsCard";
 import TripCard from "components/TripCard";
 import React from "react";
-import { allTrips, dashboardStats, user } from "~/constants";
+import { useLoaderData } from "react-router";
+import { getUser } from "~/appwrite/auth";
+import { allTrips, dashboardStats } from "~/constants";
+import type { Route } from "./+types/dashboard";
 
-const Dashboard = () => {
+export const loader = () => {
+  return <div className="size-5 bg-red-300 animate-spin" />;
+};
+export const clientLoader = async () => await getUser();
+
+const Dashboard = ({ loaderData }: Route.ComponentProps) => {
+  const user = loaderData as User | null;
   return (
     <main className="dashboard wrapper">
       <Header
-        title={`Welcome ${user.name ?? "Guest"} 👋`}
+        title={`Welcome ${user?.name ?? "Guest"} 👋`}
         description="Track activity, trends and popular destinations in real time"
       />
       <section className="flex flex-col gap-6">
