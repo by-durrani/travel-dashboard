@@ -5,8 +5,8 @@
 /.react-router/
 /build/
 
-.env.local
+branch_structure.json
 temp_auto_push.bat
 temp_interactive_push.bat
 .gitignore
-branch_structure.json
+config.bat
